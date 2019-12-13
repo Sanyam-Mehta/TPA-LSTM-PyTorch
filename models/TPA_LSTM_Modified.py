@@ -236,12 +236,12 @@ class Model(nn.Module):
 
 
             attended_states = torch.bmm(context_vector_matrix_uni, context_vector_individual).cuda()
-            h_intermediate = attended_states + torch.bmm(hidden_matrix, final_hidden_state).cuda()
+            h_intermediate1 = attended_states + torch.bmm(hidden_matrix, final_hidden_state).cuda()
 
             if (feature_num == 0):
-                h_output = torch.bmm(final_matrix, h_intermediate).cuda()
+                h_output = torch.bmm(final_matrix, h_intermediate1).cuda()
             else:
-                h_output += torch.bmm(final_matrix, h_intermediate).cuda()
+                h_output += torch.bmm(final_matrix, h_intermediate1).cuda()
 
         h_intermediate2 = torch.bmm(self.bridge_matrix, h_output).cuda()
 
